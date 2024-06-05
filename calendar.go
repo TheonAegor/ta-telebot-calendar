@@ -201,7 +201,9 @@ func (cal *Calendar) addDaysRows() {
 			}
 			ctx.Message().Payload = cal.genDateStrFromDay(dayInt)
 
-			upd := tb.Update{Message: ctx.Message()}
+			upd := ctx.Update()
+			upd.Message = ctx.Message()
+
 			cal.Bot.ProcessUpdate(upd)
 
 			ctx.Respond()
