@@ -2,7 +2,7 @@
 **Telebot-calendar** is an extension of the calendar inline-keyboard for Golang [Telebot.v3](http://github.com/tucnak/telebot "Telebot.v3")
 
 ```bash
-go get github.com/oramaz/telebot-calendar
+go get github.com/TheonAegor/ta-telebot-calendar
 ```
 
 
@@ -14,7 +14,7 @@ go get github.com/oramaz/telebot-calendar
 Look at the initialization example
 ```go
 import (
-	tb_cal "github.com/oramaz/telebot-calendar"
+	tb_cal "github.com/TheonAegor/ta-telebot-calendar"
 	tb "gopkg.in/tucnak/telebot.v3"
 )
 
