@@ -62,3 +62,11 @@ calendar := tb_cal.NewCalendar(b, tb_cal.Options{
 # 
 Have a good coding experience! 
 I'll be happy to answer any questions and suggestions.
+
+### Dev-v2
+- [ ] support state
+- [ ] ability to set range of data
+
+Tech details
+- [ ] allow change button text for edit menu
+- [ ] allow add your own handlers for buttons

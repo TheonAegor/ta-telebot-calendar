@@ -16,3 +16,14 @@ func randSequence(n int) string {
 	}
 	return string(b)
 }
+
+func randSequenceV2(n int, seed int64) string {
+	rand.Seed(seed)
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
+}
