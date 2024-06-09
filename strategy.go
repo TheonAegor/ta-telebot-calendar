@@ -32,7 +32,7 @@ func (fs FromConfig) GetMonthRow() tb.Row {
 	var monthRow tb.Row
 
 	btn := tb.Btn{
-		Unique: genUniqueParam("month_year_btn"),
+		Unique: genUniqueParamV2("month_year_btn", fs.opt.Seed),
 		Text:   fmt.Sprintf("%s %v", fs.getMonthDisplayName(fs.currMonth), fs.currYear),
 	}
 
@@ -45,7 +45,7 @@ func (fs FromConfig) GetWeekdaysRow() tb.Row {
 	var weekdaysRow tb.Row
 
 	for i, wd := range fs.getWeekdaysDisplayArray() {
-		btn := tb.Btn{Unique: genUniqueParam("weekday_" + fmt.Sprint(i)), Text: wd}
+		btn := tb.Btn{Unique: genUniqueParamV2("weekday_"+fmt.Sprint(i), fs.opt.Seed), Text: wd}
 		// TODO add ignore handler
 		weekdaysRow = append(weekdaysRow, btn)
 	}
@@ -75,7 +75,7 @@ func (fs FromConfig) GetDays() Rows {
 	var row tb.Row
 	// Inserting empty buttons forward
 	for i := 1; i < weekdayNumber; i++ {
-		cell := tb.Btn{Unique: genUniqueParam("empty_cell"), Text: " "}
+		cell := tb.Btn{Unique: genUniqueParamV2("empty_cell", fs.opt.Seed), Text: " "}
 		// TODO add empty cell handler
 		row = append(row, cell)
 	}
@@ -84,7 +84,7 @@ func (fs FromConfig) GetDays() Rows {
 	for i := 1; i <= amountOfDaysInMonth; i++ {
 		dayText := strconv.Itoa(i)
 		cell := tb.Btn{
-			Unique: genUniqueParam("day_" + fmt.Sprint(i)),
+			Unique: genUniqueParamV2("day_"+fmt.Sprint(i), fs.opt.Seed),
 			Text:   dayText, Data: dayText,
 		}
 
@@ -101,7 +101,7 @@ func (fs FromConfig) GetDays() Rows {
 	// Inserting empty buttons at the end
 	if len(row) > 0 {
 		for i := len(row); i < AmountOfDaysInWeek; i++ {
-			cell := tb.Btn{Unique: genUniqueParam("empty_cell"), Text: " "}
+			cell := tb.Btn{Unique: genUniqueParamV2("empty_cell", fs.opt.Seed), Text: " "}
 			row = append(row, cell)
 		}
 		daysRows = append(daysRows, row)
@@ -113,14 +113,14 @@ func (fs FromConfig) GetDays() Rows {
 func (fs FromConfig) GetControls() tb.Row {
 	var row tb.Row
 
-	prev := tb.Btn{Unique: genUniqueParam("prev_month"), Text: "＜"}
+	prev := tb.Btn{Unique: genUniqueParamV2("prev_month", fs.opt.Seed), Text: "＜"}
 
 	// Hide "prev" button if it rests on the range
 	if fs.currYear <= fs.opt.YearRange[0] && fs.currMonth == 1 {
 		prev.Text = ""
 	}
 
-	next := tb.Btn{Unique: genUniqueParam("next_month"), Text: "＞"}
+	next := tb.Btn{Unique: genUniqueParamV2("next_month", fs.opt.Seed), Text: "＞"}
 
 	// Hide "next" button if it rests on the range
 	if fs.currYear >= fs.opt.YearRange[1] && fs.currMonth == 12 {
@@ -158,7 +158,7 @@ func (m MonthBoard) GetKeyboard(_ Rows) Rows {
 	for i := 1; i <= 12; i++ {
 		monthName := m.getMonthDisplayName(time.Month(i))
 		monthBtn := tb.Btn{
-			Unique: genUniqueParam("month_pick_" + fmt.Sprint(i)),
+			Unique: genUniqueParamV2("month_pick_"+fmt.Sprint(i), m.opt.Seed),
 			Text:   monthName, Data: strconv.Itoa(i),
 		}
 

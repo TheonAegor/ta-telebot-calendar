@@ -162,6 +162,8 @@ type StateOptions struct {
 	// otherwise - English
 	Language string
 
+	Seed int64
+
 	MonthBtnHandler StateHandler
 	// handler for months menu
 	MonthsBtnHandler  StateHandler
@@ -271,7 +273,7 @@ func DefaultStateOptions(m *fsm.Manager, d fsm.Dispatcher) StateOptions {
 			fsmopt.On(&btn),
 			fsmopt.OnStates(fsm.AnyState),
 			fsmopt.Do(func(c tele.Context, state fsm.Context) error {
-				if c.Data() == "<" {
+				if btn.Text == "<" {
 					// Additional protection against entering the years ranges
 					if cal.GetCurrMonth() > 1 {
 						cal.SetCurrMonth(cal.GetCurrMonth() - 1)
@@ -303,6 +305,7 @@ func DefaultStateOptions(m *fsm.Manager, d fsm.Dispatcher) StateOptions {
 		InitialMonth:      time.Now().Month(),
 		YearRange:         [2]int{MinYearLimit, MaxYearLimit},
 		Language:          "ru",
+		Seed:              time.Now().UnixNano(),
 		MonthBtnHandler:   monthBtnHandler,
 		WeekDayBtnHandler: weekBtnHandler,
 		DayBtnHandler:     dayBtnHandler,

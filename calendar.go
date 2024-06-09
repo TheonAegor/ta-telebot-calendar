@@ -300,6 +300,10 @@ func genUniqueParam(base string) string {
 	return fmt.Sprintf("%s_%s", base, randSequence(8))
 }
 
+func genUniqueParamV2(base string, seed int64) string {
+	return fmt.Sprintf("%s_%s", base, randSequenceV2(8, seed))
+}
+
 // Utility function for passing a row to the calendar's keyboard
 func (cal *Calendar) addRowToKeyboard(row *[]tb.InlineButton) {
 	cal.kb = append(cal.kb, *row)
